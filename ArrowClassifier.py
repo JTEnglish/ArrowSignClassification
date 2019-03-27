@@ -74,6 +74,7 @@ class ArrowClassifier:
                 if avg > max_avg_dist:
                     max_avg_dist = avg
                     tip = pt
+
             if __debug__:
                 print('Arrow tip:', tip)
 
@@ -92,23 +93,23 @@ class ArrowClassifier:
             if __debug__:
                 print('\nDirection result:', direction)
 
-            # graph debugging
-            x = []
-            y = []
-            for pt in self.pointList:
-                x.append(pt[0])
-                y.append(pt[1])
-            x.append(x[0])
-            y.append(y[0])
-            plt.plot(x,y)
+            if __debug__: # graph
+                x = []
+                y = []
+                for pt in self.pointList:
+                    x.append(pt[0])
+                    y.append(pt[1])
+                x.append(x[0])
+                y.append(y[0])
+                plt.plot(x,y)
 
-            plt.plot(cr[0][0], cr[0][1], marker='o', markersize=6, color="red")
-            plt.plot(cr[1][0], cr[1][1], marker='o', markersize=6, color="red")
+                plt.plot(cr[0][0], cr[0][1], marker='o', markersize=6, color="red")
+                plt.plot(cr[1][0], cr[1][1], marker='o', markersize=6, color="red")
 
-            plt.plot(tip[0], tip[1], marker='o', markersize=6, color="blue")
+                plt.plot(tip[0], tip[1], marker='o', markersize=6, color="blue")
 
-            plt.axis('equal')
-            plt.show()
+                plt.axis('equal')
+                plt.show()
             
             return direction
         else:
