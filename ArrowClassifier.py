@@ -74,6 +74,8 @@ class ArrowClassifier:
                 if avg > max_avg_dist:
                     max_avg_dist = avg
                     tip = pt
+            if __debug__:
+                print('Arrow tip:', tip)
 
             cr_mid = self.__get_midpoint(cr[0], cr[1])
             if abs(tip[0] - cr_mid[0]) > abs(tip[1] - cr_mid[1]): # left or right
