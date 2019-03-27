@@ -66,15 +66,29 @@ class ArrowClassifier:
 
             cr = self.__find_concave_regions()
 
-            # find farthest point from both cr's
+            # find farthest point from both cr's is the arrow tip
             max_avg_dist = 0
-            max_dist_pt = self.pointList[0]
+            tip = self.pointList[0]
             for pt in self.pointList:
                 avg = (self.__distance(cr[0], pt) + self.__distance(cr[1], pt)) / 2
                 if avg > max_avg_dist:
                     max_avg_dist = avg
-                    max_dist_pt = pt
+                    tip = pt
 
+            cr_mid = self.__get_midpoint(cr[0], cr[1])
+            if abs(tip[0] - cr_mid[0]) > abs(tip[1] - cr_mid[1]): # left or right
+                if tip[0] > cr_mid[0]:
+                    direction = 'RIGHT'
+                else:
+                    direction = 'LEFT'
+            else: # up or down
+                if tip[1] > cr_mid[1]:
+                    direction = 'DOWN'
+                else:
+                    direction = 'UP'
+
+            if __debug__:
+                print('\nDirection result:', direction)
 
             # graph debugging
             x = []
@@ -84,15 +98,12 @@ class ArrowClassifier:
                 y.append(pt[1])
             x.append(x[0])
             y.append(y[0])
-            print()
-            print(x)
-            print(y)
             plt.plot(x,y)
 
             plt.plot(cr[0][0], cr[0][1], marker='o', markersize=6, color="red")
             plt.plot(cr[1][0], cr[1][1], marker='o', markersize=6, color="red")
 
-            plt.plot(max_dist_pt[0], max_dist_pt[1], marker='o', markersize=6, color="blue")
+            plt.plot(tip[0], tip[1], marker='o', markersize=6, color="blue")
 
             plt.axis('equal')
             plt.show()

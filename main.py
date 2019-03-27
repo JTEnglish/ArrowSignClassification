@@ -58,7 +58,7 @@ def main():
         c = c.astype("int")
         cv2.drawContours(image, [c], -1, (0, 255, 0), 2)
         cv2.putText(image, direction, (cX, cY), cv2.FONT_HERSHEY_SIMPLEX,
-            0.5, (255, 0, 255), 2)
+            5, (255, 0, 255), 2)
 
     # show the output image
     cv2.imshow("Image", imutils.resize(image, width=1000))
